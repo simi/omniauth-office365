@@ -1,4 +1,4 @@
-# Omniauth::Office365
+# Omniauth::Office365 [![Build Status](https://travis-ci.org/simi/omniauth-office365.svg?branch=master)](https://travis-ci.org/simi/omniauth-office365)
 
 Office365 OAuth2 Strategy for OmniAuth.
 
