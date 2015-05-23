@@ -11,18 +11,22 @@ module OmniAuth
         authorize_url: 'https://login.windows.net/common/oauth2/authorize'
       }
 
-      uid { raw_info["MailboxGuid"] }
+      option :authorize_params, {
+        resource: 'https://graph.windows.net/'
+      }
+
+      uid { raw_info["objectId"] }
 
       info do
         {
-          'email' => raw_info["Id"],
-          'name' => raw_info["DisplayName"],
-          'nickname' => raw_info["Alias"]
+          'email' => raw_info["userPrincipalName"],
+          'name' => [raw_info["givenName"], raw_info["surname"]].join(' '),
+          'nickname' => raw_info["displayName"]
         }
       end
 
       def raw_info
-        @raw_info ||= access_token.get('/ews/odata/me').parsed
+        @raw_info ||= access_token.get(authorize_params.resource + 'Me?api-version=1.5').parsed
       end
     end
   end
