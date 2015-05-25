@@ -2,10 +2,12 @@ $:.push File.dirname(__FILE__) + '/../lib'
 
 require 'omniauth-office365'
 require 'sinatra'
+require 'json'
 
+set :port, 4200
 
-office365_client_id = 'PROVIDE'
-office365_client_secret = 'ME'
+office365_client_id = ENV['OFFICE365_CLIENT_ID']
+office365_client_secret = ENV['OFFICE365_CLIENT_SECRET']
 
 use Rack::Session::Cookie
 use OmniAuth::Builder do
@@ -18,10 +20,10 @@ end
 
 get '/auth/office365/callback' do
   content_type 'text/plain'
-  request.env['omniauth.auth'].inspect
+  request.env['omniauth.auth'].to_json
 end
 
 get '/auth/failure' do
   content_type 'text/plain'
-  params.inspect
+  params.to_json
 end
