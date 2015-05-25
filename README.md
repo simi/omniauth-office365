@@ -7,7 +7,7 @@ Office365 OAuth2 Strategy for OmniAuth.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'omniauth-office365', github: 'simi/omniauth-office365'
+gem 'omniauth-office365'
 ```
 
 And then execute:
